@@ -12,6 +12,7 @@ toward data science/ML internship readiness.
 | # | Assignment | Topic | Key Result |
 |---|------------|-------|------------|
 | 1 | [Medical Insurance Cost Prediction](./Assignment-1-Medical-Insurance-Regression) | Multiple Linear Regression | R² ≈ 0.78 |
+| 2 | [Customer Churn Prediction](./Assignment-2-Customer-Churn-Prediction-using-Logistic-Regression) | Logistic Regression | Accuracy ≈ 80.6%, F1 ≈ 0.60 |
 
 *(More assignments will be added here as they're completed — each gets its own folder and row in this table.)*
 
