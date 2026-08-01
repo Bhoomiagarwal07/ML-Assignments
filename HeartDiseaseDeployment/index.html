@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>❤️ Heart Disease Risk Predictor</h1>
+        <p class="subtitle">Enter clinical parameters to estimate heart disease risk, predicted by a Random Forest model.</p>
+
+        <form method="POST" action="/">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" required value="55">
+                </div>
+                <div class="form-group">
+                    <label for="sex">Sex (1=male, 0=female)</label>
+                    <input type="number" id="sex" name="sex" min="0" max="1" required value="1">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cp">Chest Pain Type (0-3)</label>
+                    <input type="number" id="cp" name="cp" min="0" max="3" required value="0">
+                </div>
+                <div class="form-group">
+                    <label for="trestbps">Resting Blood Pressure</label>
+                    <input type="number" id="trestbps" name="trestbps" required value="130">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="chol">Cholesterol (mg/dl)</label>
+                    <input type="number" id="chol" name="chol" required value="240">
+                </div>
+                <div class="form-group">
+                    <label for="fbs">Fasting Blood Sugar &gt;120 (1=yes, 0=no)</label>
+                    <input type="number" id="fbs" name="fbs" min="0" max="1" required value="0">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="restecg">Resting ECG Results (0-2)</label>
+                    <input type="number" id="restecg" name="restecg" min="0" max="2" required value="1">
+                </div>
+                <div class="form-group">
+                    <label for="thalach">Max Heart Rate Achieved</label>
+                    <input type="number" id="thalach" name="thalach" required value="150">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="exang">Exercise Induced Angina (1=yes, 0=no)</label>
+                    <input type="number" id="exang" name="exang" min="0" max="1" required value="0">
+                </div>
+                <div class="form-group">
+                    <label for="oldpeak">ST Depression (oldpeak)</label>
+                    <input type="number" id="oldpeak" name="oldpeak" step="0.1" required value="1.0">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="slope">Slope of ST Segment (0-2)</label>
+                    <input type="number" id="slope" name="slope" min="0" max="2" required value="1">
+                </div>
+                <div class="form-group">
+                    <label for="ca">Number of Major Vessels (0-4)</label>
+                    <input type="number" id="ca" name="ca" min="0" max="4" required value="0">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="thal">Thalassemia (0-3)</label>
+                <input type="number" id="thal" name="thal" min="0" max="3" required value="2">
+            </div>
+
+            <button type="submit">Predict Risk</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result {{ 'danger' if 'Detected' in prediction and 'No' not in prediction else 'safe' }}">
+            <h2>Prediction</h2>
+            <p class="prediction-value">{{ prediction }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            <p>⚠️ Error: {{ error }}</p>
+        </div>
+        {% endif %}
+
+        <div class="api-note">
+            <p>Prefer JSON? POST to <code>/predict</code> with a JSON body containing all 13
+            clinical fields (age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang,
+            oldpeak, slope, ca, thal).</p>
+        </div>
+    </div>
+</body>
+</html>
