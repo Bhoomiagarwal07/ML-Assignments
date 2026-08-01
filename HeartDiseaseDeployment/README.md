@@ -6,7 +6,7 @@ based on clinical parameters, expose it via a Flask REST API, and deploy it as a
 publicly accessible web service using Render.
 
 ## 🔗 Live Demo
-**Render URL:** _[fill in after deploying — see deployment steps below]_
+**Render URL:** https://heartdiseasedeployment-8jvp.onrender.com
 
 Example request:
 ```bash
